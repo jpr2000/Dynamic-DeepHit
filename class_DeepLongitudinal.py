@@ -168,7 +168,7 @@ class Model_Longitudinal_Attention:
             rnn_outputs = _transpose_batch_time(rnn_outputs_ta.stack())
             # rnn_outputs =  tf.reshape(rnn_outputs, [-1, self.max_length-1, self.h_dim1])
 
-            rnn_states  = _transpose_batch_time(loop_state_ta[1].stack())
+            rnn_states  = _transpose_batch_time(loop_state_ta[1].stack()) #hidden states (h_{j})
 
             att_weight  = _transpose_batch_time(loop_state_ta[0].stack()) #e_{j}
             att_weight  = tf.reshape(att_weight, [-1, self.max_length-1]) * rnn_mask_att # masking to set 0 for the unmeasured e_{j}
