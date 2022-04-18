@@ -3,9 +3,21 @@
 # 
 # ### by Changhee Lee
 
-# %%
+
+"""
+TODO:
+
+* Save c_index, brier score, anything else that can't be re-run
+* Add Zhale's surv -> prediction at end
+    * Save figures
+* Look into how to save/re-run models
+
+
+"""
+
 _EPSILON = 1e-08
 
+from argparse import ArgumentParser
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -22,6 +34,11 @@ from utils_eval             import c_index, brier_score
 from utils_log              import save_logging, load_logging
 from utils_helper           import f_get_minibatch, f_get_boosted_trainset
 from datetime import datetime
+
+parser = ArgumentParser()
+parser.add_argument('-t', '--times', help='delimited list input via commas', type=str, required=True)
+args = parser.parse_args()
+prediction_times = [int(item) for item in args.times.split(',')]
 
 # %%
 def _f_get_pred(sess, model, data, data_mi, pred_horizon):
@@ -75,8 +92,6 @@ def f_get_risk_predictions(sess, model, data_, data_mi_, pred_time, eval_time):
 # #####      - Users must prepare dataset in csv format and modify 'import_data.py' following our examplar 'PBC2'
 
 # %%
-import import_data as impt
-
 data_mode                   = 'PBC2' 
 seed                        = 1234
 
@@ -317,6 +332,14 @@ df1 = pd.DataFrame(final1, index = row_header, columns=col_header)
 df2 = pd.DataFrame(final2, index = row_header, columns=col_header)
 
 ### PRINT RESULTS
+
+# Redirecting print statements to output file
+import sys
+output_file = open(file_path + '/outputs.txt','w')
+sys.stdout = output_file
+
+
+### PRINT RESULTS
 print('========================================================')
 print('--------------------------------------------------------')
 print('- C-INDEX: ')
@@ -326,7 +349,4 @@ print('- BRIER-SCORE: ')
 print(df2)
 print('========================================================')
 
-# %%
-
-
-
+output_file.close()
