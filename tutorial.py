@@ -14,13 +14,14 @@ import os
 
 from sklearn.model_selection import train_test_split
 
-import import_data as impt
+import import_mimic as impt
 
 from class_DeepLongitudinal import Model_Longitudinal_Attention
 
 from utils_eval             import c_index, brier_score
 from utils_log              import save_logging, load_logging
 from utils_helper           import f_get_minibatch, f_get_boosted_trainset
+from datetime import datetime
 
 # %%
 def _f_get_pred(sess, model, data, data_mi, pred_horizon):
@@ -103,7 +104,7 @@ _, num_Event, num_Category  = np.shape(mask1)  # dim of mask3: [subj, Num_Event,
 max_length                  = np.shape(data)[1]
 
 
-file_path = '{}'.format(data_mode)
+file_path = '{}'.format(data_mode + datetime.now().isoformat())
 
 if not os.path.exists(file_path):
     os.makedirs(file_path)
