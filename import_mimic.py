@@ -111,12 +111,12 @@ def f_construct_dataset(df, feat_list):
     return pat_info, data
 
 
-def import_dataset(norm_mode = 'standard'):
+def import_dataset(norm_mode = 'standard', out = 'new'):
 
     #df_                = pd.read_csv('./data/pbc2_cleaned.csv')
     #df_                = pd.read_csv('./data/geomet_new.csv')
     #df_                = pd.read_csv('./data/mimic_reduced_48_complete.csv')
-    df_                = pd.read_csv('./data/mimic_reduced_5Day.csv')
+    df_                = pd.read_csv('./data/mimic_new2.csv')
 #    print(df_)
     
 
@@ -158,7 +158,15 @@ def import_dataset(norm_mode = 'standard'):
     label           = pat_info[:,[2]]  #two competing risks
     time            = pat_info[:,[1]]  #age when event occurred
 
-    num_Category    = int(np.max(pat_info[:, 1]))# * 1.2) #or specifically define larger than the max tte
+
+    num_Category = 0
+    
+    if out is "old":
+        num_Category    = int(np.max(pat_info[:, 1]))# * 1.2) #or specifically define larger than the max tte
+    else:
+        num_Category    = int(np.max(pat_info[:, 1]) * 1.2)# * 1.2) #or specifically define larger than the max tte
+
+
     num_Event       = len(np.unique(label)) - 1
 
     if num_Event == 1:

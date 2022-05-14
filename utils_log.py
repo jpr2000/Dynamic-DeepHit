@@ -3,6 +3,9 @@ def save_logging(dictionary, log_name):
         for key, value in dictionary.items():
             f.write('%s:%s\n' % (key, value))
 
+def save_string(content, log_name):
+    with open(log_name, 'a') as f:
+        f.write(content + "\n")
 
 def load_logging(filename):
     data = dict()

@@ -140,6 +140,7 @@ def import_dataset(norm_mode = 'standard'):
     time            = pat_info[:,[1]]  #age when event occurred
 
     num_Category    = int(np.max(pat_info[:, 1]) * 1.2) #or specifically define larger than the max tte
+    print(num_Category)
     num_Event       = len(np.unique(label)) - 1
 
     if num_Event == 1:

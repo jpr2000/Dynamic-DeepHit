@@ -44,7 +44,7 @@ class Model_Longitudinal_Attention:
         # NETWORK HYPER-PARMETERS
         self.h_dim1             = network_settings['h_dim_RNN']
         self.h_dim2             = network_settings['h_dim_FC']
-        self.num_layers_RNN     = network_settings['num_layers_RNN']
+        self.num_layers_RNN     = network_settings['num_layers_RNN']F
         self.num_layers_ATT     = network_settings['num_layers_ATT']
         self.num_layers_CS      = network_settings['num_layers_CS']
 

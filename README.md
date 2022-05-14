@@ -7,7 +7,8 @@ https://github.com/jpr2000/Dynamic-DeepHit
 2. conda install numpy==1.16.5 pandas==1.0.1 tensorflow==1.13.1 scikit-learn==0.22.1  termcolor==1.1.0
 3. pip install lifelines==0.24.9 scikit-survival==0.12.0
 
-
+## Example Input
+python -m tutorial_mimic_5Day.py
 
 
 # Dynamic-DeepHit
